@@ -17,7 +17,10 @@
   "_moduleAliases": {
     "@": "dist"
   },
-  "keywords": ["miniprogram", "commander"],
+  "keywords": [
+    "miniprogram",
+    "commander"
+  ],
   "author": "BreathlessWay",
   "license": "ISC",
   "dependencies": {
