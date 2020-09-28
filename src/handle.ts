@@ -5,5 +5,4 @@ if (cli.debug) {
 }
 
 if (cli.projectName) {
-  console.log(`- ${cli.projectName}`);
 }
