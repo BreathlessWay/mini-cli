@@ -20,3 +20,4 @@
 // src/index.ts入口文件添加
 import 'module-alias/register';
 ```
+2. [standard-version](https://github.com/conventional-changelog/standard-version) 配合 [commitlint](https://github.com/conventional-changelog/commitlint) 生成版本CHANGELOG.md
