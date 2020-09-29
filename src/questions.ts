@@ -1,80 +1,32 @@
+import { userInfo } from "os";
+
+import { ECss, ELanguage, EProjectConfig } from "@/constans";
+
 const questions = [
     {
-        type: 'input',
-        name: 'phone',
-        message: "What's your phone number?",
-        validate: function (value:string) {
-            var pass = value.match(
-                /^([01]{1})?[-.\s]?\(?(\d{3})\)?[-.\s]?(\d{3})[-.\s]?(\d{4})\s?((?:#|ext\.?\s?|x\.?\s?){1}(?:\d+)?)?$/i
-            );
-            if (pass) {
-                return true;
-            }
-            return 'Please enter a valid phone number';
-        },
+        type: "input",
+        name: EProjectConfig.Author,
+        message: "The author of this mini program",
+        default: userInfo().username,
     },
     {
-        type: 'list',
-        name: 'size',
-        message: 'What size do you need?',
-        choices: ['Large', 'Medium', 'Small'],
-        filter: function (val:string) {
-            return val.toLowerCase();
-        },
+        type: "input",
+        name: EProjectConfig.Description,
+        message: "The description of this mini program",
+        default: "mini program",
     },
     {
-        type: 'input',
-        name: 'quantity',
-        message: 'How many do you need?',
-        validate: function (value:string) {
-            var valid = !isNaN(parseFloat(value));
-            return valid || 'Please enter a number';
-        },
-        filter: Number,
+        type: "list",
+        name: EProjectConfig.Language,
+        message: "What language do you prefer to use?",
+        choices: [ELanguage.Typescript, ELanguage.Javascript],
     },
     {
-        type: 'expand',
-        name: 'toppings',
-        message: 'What about the toppings?',
-        choices: [
-            {
-                key: 'p',
-                name: 'Pepperoni and cheese',
-                value: 'PepperoniCheese',
-            },
-            {
-                key: 'a',
-                name: 'All dressed',
-                value: 'alldressed',
-            },
-            {
-                key: 'w',
-                name: 'Hawaiian',
-                value: 'hawaiian',
-            },
-        ],
-    },
-    {
-        type: 'rawlist',
-        name: 'beverage',
-        message: 'You also get a free 2L beverage',
-        choices: ['Pepsi', '7up', 'Coke'],
-    },
-    {
-        type: 'input',
-        name: 'comments',
-        message: 'Any comments on your purchase experience?',
-        default: 'Nope, all good!',
-    },
-    {
-        type: 'list',
-        name: 'prize',
-        message: 'For leaving a comment, you get a freebie',
-        choices: ['cake', 'fries'],
-        when: function (answers:any) {
-            return answers.comments !== 'Nope, all good!';
-        },
+        type: "list",
+        name: EProjectConfig.CSS,
+        message: "What css do you prefer to use?",
+        choices: [ECss.Wxss, ECss.Css, ECss.Sass, ECss.Less],
     },
 ];
 
-export default questions
+export default questions;

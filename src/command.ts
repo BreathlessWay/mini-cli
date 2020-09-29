@@ -1,5 +1,6 @@
 import { Command } from "commander";
 
+import log from "@/log";
 import { handleOptions } from "@/handle";
 
 import { InterfaceCLI } from "@/types/cli";
@@ -17,9 +18,9 @@ cli
     handleOptions(option);
   })
   .on("--help", () => {
-    console.log("");
-    console.log("Example call:");
-    console.log("  $ mini --help");
-    console.log("");
+    log.log("");
+    log.log("Example call:");
+    log.log("  $ mini --help");
+    log.log("");
   })
   .parse(process.argv);

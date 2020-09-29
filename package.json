@@ -1,7 +1,7 @@
 {
   "name": "mini",
   "version": "0.0.1",
-  "description": "miniprogram cli",
+  "description": "mini program cli",
   "main": "bin/mini",
   "bin": {
     "mini": "bin/mini"
