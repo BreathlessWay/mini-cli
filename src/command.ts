@@ -1,31 +1,20 @@
 import { Command } from "commander";
 
-import { InterfaceCLI } from "@/types/cli";
-import inquirer from "inquirer";
+import { handleOptions } from "@/handle";
 
-import questions from "@/questions";
+import { InterfaceCLI } from "@/types/cli";
 
 const packageJson = require("../package.json");
 
 const cli: InterfaceCLI = new Command();
 
-const INIT = "init";
-
 cli
-  .command(INIT)
   .description("Generate Mini Program Template")
-  .version(packageJson.version)
-  // .option("-d, --debug", "show debug info")
-  // .option("-p, --project-name <name>", "current project name")
-  .action((options: InterfaceCLI) => {
-    if (!options.args.length || options.args[0] !== INIT) {
-      console.log(options.help());
-      return;
-    }
-    inquirer.prompt(questions).then((answers) => {
-      console.log("\nOrder receipt:");
-      console.log(JSON.stringify(answers, null, "  "));
-    });
+  .version(packageJson.version, "-v, --version")
+  .option("-d, --debug", "show debug info")
+  .option("-i, --init <name>", "init project name")
+  .action((option: InterfaceCLI) => {
+    handleOptions(option);
   })
   .on("--help", () => {
     console.log("");
@@ -34,5 +23,3 @@ cli
     console.log("");
   })
   .parse(process.argv);
-
-export default cli;
