@@ -24,17 +24,13 @@ export const handleOptions = async (option: InterfaceCLI) => {
             option.help();
             return;
         }
-        log.log("");
         log.info("> 配置项目信息：");
-        log.log("");
 
         const answers = (await inquirer.prompt(projectQuestions)) || {};
         log.fatal("\n项目配置:");
-        log.log("");
         log.info(
             JSON.stringify({ ProjectName: projectName, ...answers }, null, "  ")
         );
-        log.log("");
 
         const projectPath = resolve(projectName);
 
@@ -47,8 +43,7 @@ export const handleOptions = async (option: InterfaceCLI) => {
                     process.exit();
                 }
             }
-            log.log("");
-            log.info("> 开始获取项目模板");
+            log.info("\n> 开始获取项目模板");
             clone(GitUrl, `${projectPath}`, null, function (err: Error) {
                 if (err) {
                     throw err;

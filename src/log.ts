@@ -6,6 +6,7 @@ const log = colorConsole({
         {
             // error:
             //     '{{timestamp}} <{{title}}> {{message}} (in {{file}}:{{line}})\nCall Stack:\n{{stack}}' // error format
+            info: `{{message}}\n`
         }
     ],
 });
