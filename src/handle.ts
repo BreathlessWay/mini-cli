@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import shell from "shelljs";
 
 import { create } from "@/create";
 
@@ -33,6 +34,11 @@ export const handleOptions = async (option: InterfaceCLI) => {
 
         log.fatal("\n项目配置:");
         log.info(JSON.stringify(projectConfig, null, "  "));
+
+        if (!shell.which("git")) {
+            shell.echo("创建项目需要依赖git，请先安装git");
+            shell.exit(1);
+        }
 
         create(projectConfig);
     } catch (e) {
