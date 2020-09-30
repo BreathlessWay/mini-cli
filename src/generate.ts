@@ -14,7 +14,7 @@ export const generate = (
         shell.rm("-rf", gitFile);
 
         // TODO 解析替换生产 package.json 和 gulpfile
-
+        //  mem-fs mem-fs-editor 和 ejs 解析模板
         shell.cd(projectPath);
         log.info("> 开始安装依赖");
         shell.exec("npm i");
