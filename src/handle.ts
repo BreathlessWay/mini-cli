@@ -25,16 +25,16 @@ export const handleOptions = async (option: InterfaceCLI) => {
         log.info("> 配置项目信息：");
 
         const answers = (await inquirer.prompt(projectQuestions)) || {};
-        log.fatal("\n项目配置:");
-        log.info(
-            JSON.stringify(
-                { [EProjectConfig.ProjectName]: projectName, ...answers },
-                null,
-                "  "
-            )
-        );
 
-        create(projectName);
+        const projectConfig = {
+            [EProjectConfig.ProjectName]: projectName,
+            ...answers,
+        };
+
+        log.fatal("\n项目配置:");
+        log.info(JSON.stringify(projectConfig, null, "  "));
+
+        create(projectConfig);
     } catch (e) {
         log.error(e);
     }

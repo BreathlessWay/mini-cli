@@ -3,39 +3,35 @@ import { access, constants } from "fs";
 import inquirer from "inquirer";
 import shell from "shelljs";
 
+import { generate } from "@/generate";
+
+import log from "@/log";
+
 import { overrideQuestion } from "@/questions";
 
 import { EProjectConfig, GitUrl } from "@/constans";
 
-import log from "@/log";
-
 const clone = require("git-clone");
 
-export const create = (projectName: string) => {
+export const create = (projectConfig: Record<EProjectConfig, string>) => {
     try {
-        const projectPath = resolve(projectName);
+        const projectPath = resolve(projectConfig[EProjectConfig.ProjectName]);
 
         access(projectPath, constants.F_OK, async (err) => {
             if (!err) {
                 const override = await inquirer.prompt(overrideQuestion);
                 if (override[EProjectConfig.Override]) {
-                    shell.rm("-rf", projectName);
+                    shell.rm("-rf", projectPath);
                 } else {
-                    process.exit();
+                    process.exit(1);
                 }
             }
             log.info("\n> 开始获取项目模板");
-            clone(GitUrl, projectPath, null, function (err: Error) {
+            clone(GitUrl, projectPath, null, async (err: Error) => {
                 if (err) {
                     throw err;
                 }
-
-                const gitFile = resolve(projectPath, ".git");
-                shell.rm("-rf", gitFile);
-                shell.cd(projectPath);
-                log.info("> 开始安装依赖");
-                shell.exec("npm i");
-                log.info("> 项目创建成功");
+                generate(projectConfig, projectPath);
             });
         });
     } catch (e) {
