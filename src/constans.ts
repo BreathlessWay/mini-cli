@@ -1,4 +1,5 @@
 export enum EProjectConfig {
+    ProjectName = 'ProjectName',
     Author = "Author",
     Description='Description',
     Language='Language',

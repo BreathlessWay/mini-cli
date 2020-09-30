@@ -29,7 +29,11 @@ export const handleOptions = async (option: InterfaceCLI) => {
         const answers = (await inquirer.prompt(projectQuestions)) || {};
         log.fatal("\n项目配置:");
         log.info(
-            JSON.stringify({ ProjectName: projectName, ...answers }, null, "  ")
+            JSON.stringify(
+                { [EProjectConfig.ProjectName]: projectName, ...answers },
+                null,
+                "  "
+            )
         );
 
         const projectPath = resolve(projectName);
