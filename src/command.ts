@@ -10,8 +10,7 @@ const packageJson = require("../package.json");
 const cli: InterfaceCLI = new Command();
 
 cli
-  .description("Generate Mini Program Template")
-  .version(packageJson.version, "-v, --version")
+  .description("Generate Mini Program Template").version(packageJson.version, "-v, --version")
   .option("-d, --debug", "show debug info")
   .option("-i, --init <name>", "init project name")
   .action((option: InterfaceCLI) => {
