@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import rimraf from 'rimraf'
 const clone = require("git-clone");
 
 import log from "@/log";
@@ -10,14 +11,15 @@ import questions from "@/questions";
 import { GitUrl } from "@/constans";
 
 export const handleOptions = async (option: InterfaceCLI) => {
+    const { debug, init: projectName, opts, help } = option;
     try {
-        if (option.debug) {
-            log.fatal(option.opts());
+        if (debug) {
+            log.fatal(opts());
             return;
         }
 
-        if (!option.init) {
-            option.help();
+        if (!projectName) {
+            help();
             return;
         }
         log.log("");
@@ -30,12 +32,12 @@ export const handleOptions = async (option: InterfaceCLI) => {
         log.info(JSON.stringify(answers, null, "  "));
         log.log("");
 
-        clone(GitUrl, `./${option.init}`, null, function (err: Error) {
+        clone(GitUrl, `./${projectName}`, null, function (err: Error) {
             if (err) {
                 throw err;
             }
             log.info("项目构建完成");
-            log.info(`清除掉${option.init}的git, 记得进入项目npm install`);
+            log.info(`清除掉${projectName}的git, 记得进入项目npm install`);
         });
     } catch (e) {
         log.error(e);
