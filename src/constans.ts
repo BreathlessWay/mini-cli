@@ -6,15 +6,15 @@ export enum EProjectConfig {
 }
 
 export enum ELanguage {
-    Typescript = "typescript",
-    Javascript = "javascript",
+    Typescript = "Typescript",
+    Javascript = "Javascript",
 }
 
 export enum ECss {
-    Wxss = "wsxx",
-    Css = "css",
-    Sass = "sass/scss",
-    Less = "less",
+    Wxss = "Wxss",
+    Css = "Css",
+    Sass = "Sass/Scss",
+    Less = "Less",
 }
 
 export const GitUrl = ''

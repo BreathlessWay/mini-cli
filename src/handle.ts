@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import rimraf from 'rimraf'
+import rimraf from "rimraf";
 const clone = require("git-clone");
 
 import log from "@/log";
@@ -11,15 +11,15 @@ import questions from "@/questions";
 import { GitUrl } from "@/constans";
 
 export const handleOptions = async (option: InterfaceCLI) => {
-    const { debug, init: projectName, opts, help } = option;
+    const { debug, init: projectName } = option;
     try {
         if (debug) {
-            log.fatal(opts());
+            log.fatal(option.opts());
             return;
         }
 
         if (!projectName) {
-            help();
+            option.help();
             return;
         }
         log.log("");
