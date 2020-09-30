@@ -2,7 +2,7 @@ import { userInfo } from "os";
 
 import { ECss, ELanguage, EProjectConfig } from "@/constans";
 
-const questions = [
+export const projectQuestions = [
     {
         type: "input",
         name: EProjectConfig.Author,
@@ -29,4 +29,11 @@ const questions = [
     },
 ];
 
-export default questions;
+export const overrideQuestion = [
+    {
+        type: "confirm",
+        name: EProjectConfig.Override,
+        message: "当前目录已存在同名文件，是否删除原文件?",
+        default: false,
+    },
+];

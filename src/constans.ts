@@ -2,7 +2,8 @@ export enum EProjectConfig {
     Author = "Author",
     Description='Description',
     Language='Language',
-    CSS='CSS'
+    CSS='CSS',
+    Override = 'Override'
 }
 
 export enum ELanguage {
@@ -17,4 +18,4 @@ export enum ECss {
     Less = "Less",
 }
 
-export const GitUrl = ''
+export const GitUrl = 'https://github.com/BreathlessWay/react-app.git'
