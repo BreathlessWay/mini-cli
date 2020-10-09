@@ -4,7 +4,7 @@ import shell from "shelljs";
 
 import { generate } from "@/generate";
 
-import { downloadTemp, isFileExist, spinner } from "@/utils";
+import { downloadTemp, isFileExist, wrapSpin } from "@/utils";
 import { lineSpaceLog, normalLog } from "@/log";
 
 import { overrideQuestion } from "@/questions";
@@ -15,6 +15,7 @@ export const create = async (projectConfig: Record<EProjectConfig, string>) => {
     const projectPath = resolve(projectConfig[EProjectConfig.ProjectName]);
 
     const exist = await isFileExist(projectPath);
+
     if (exist) {
         const override = await inquirer.prompt(overrideQuestion);
         if (override[EProjectConfig.Override]) {
@@ -27,10 +28,12 @@ export const create = async (projectConfig: Record<EProjectConfig, string>) => {
         lineSpaceLog();
     }
 
-    spinner.start();
-    spinner.message("> 开始获取项目模板");
-    await downloadTemp({ url: GitUrl, path: projectPath });
-    spinner.stop();
+    await wrapSpin({
+        text: "> 开始获取项目模板",
+        successText: "> 获取项目模板成功",
+        func: async () =>
+            await downloadTemp({ url: GitUrl, path: projectPath }),
+    });
 
     await generate(projectConfig, projectPath);
 };

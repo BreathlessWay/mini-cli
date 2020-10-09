@@ -1,9 +1,10 @@
 import { access, constants } from "fs";
-import { Spinner } from "clui";
+import ora from "ora";
+import { normalChalk, successChalk } from "@/log";
 
 const clone = require("git-clone");
 
-export const spinner = new Spinner("");
+export const spinner = ora("");
 
 export const isFileExist = (path: string) => {
     return new Promise((resolve) => {
@@ -23,4 +24,21 @@ export const downloadTemp = ({ url, path }: { url: string; path: string }) => {
             }
         });
     });
+};
+
+export const wrapSpin = async ({
+    text,
+    func,
+    successText,
+}: {
+    text: string;
+    successText: string;
+    func: Function;
+}) => {
+    const loadingLog = spinner.start(normalChalk(text));
+    loadingLog.color = "blue";
+    await func();
+    loadingLog.color = "green";
+    loadingLog.succeed(successChalk(successText));
+    loadingLog.stop();
 };
