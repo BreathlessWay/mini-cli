@@ -1,7 +1,8 @@
 import { Command } from "commander";
 
-import log from "@/log";
 import { handleOptions } from "@/handle";
+
+import { lineSpaceLog } from "@/log";
 
 import { InterfaceCLI } from "@/types/cli";
 
@@ -17,9 +18,9 @@ cli.description("Generate Mini Program Template")
         handleOptions(option);
     })
     .on("--help", () => {
-        log.log("");
-        log.log("Example call:");
-        log.log("  $ mini --help");
-        log.log("");
+        lineSpaceLog();
+        console.log("Example call:");
+        console.log("  $ mini --help");
+        lineSpaceLog();
     })
     .parse(process.argv);

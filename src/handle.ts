@@ -3,7 +3,7 @@ import shell from "shelljs";
 
 import { create } from "@/create";
 
-import log from "@/log";
+import { errorLog, normalLog, configLog, lineSpaceLog } from "@/log";
 
 import { InterfaceCLI } from "@/types/cli";
 
@@ -15,7 +15,7 @@ export const handleOptions = async (option: InterfaceCLI) => {
     const { debug, init: projectName } = option;
     try {
         if (debug) {
-            log.fatal(option.opts());
+            configLog(option.opts());
             return;
         }
 
@@ -23,7 +23,8 @@ export const handleOptions = async (option: InterfaceCLI) => {
             option.help();
             return;
         }
-        log.info("> 配置项目信息：");
+
+        normalLog("> 配置项目信息：");
 
         const answers = (await inquirer.prompt(projectQuestions)) || {};
 
@@ -32,16 +33,16 @@ export const handleOptions = async (option: InterfaceCLI) => {
             ...answers,
         };
 
-        log.fatal("\n项目配置:");
-        log.info(JSON.stringify(projectConfig, null, "  "));
+        normalLog("\n> 项目配置:");
+        configLog(projectConfig);
+        lineSpaceLog();
 
         if (!shell.which("git")) {
-            shell.echo("创建项目需要依赖git，请先安装git");
-            shell.exit(1);
+            errorLog("创建项目需要依赖git，请先安装git");
         }
 
         create(projectConfig);
     } catch (e) {
-        log.error(e);
+        errorLog(e);
     }
 };

@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import shell from "shelljs";
 
-import log from "@/log";
+import { errorLog, normalLog } from "@/log";
 
 import { EProjectConfig } from "@/constans";
 
@@ -12,14 +12,14 @@ export const generate = (
     try {
         const gitFile = resolve(projectPath, ".git");
         shell.rm("-rf", gitFile);
-
         // TODO 解析替换生产 package.json 和 gulpfile
-        //  mem-fs mem-fs-editor 和 ejs 解析模板
+        // TODO mem-fs mem-fs-editor 和 ejs 解析模板
+        normalLog("> 模板获取成功，开始安装依赖...");
         shell.cd(projectPath);
-        log.info("> 开始安装依赖");
         shell.exec("npm i");
-        log.info("> 项目创建成功");
+        normalLog("> 项目创建成功");
+        process.exit();
     } catch (e) {
-        log.error(e);
+        errorLog(e);
     }
 };
