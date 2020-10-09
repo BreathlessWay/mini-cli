@@ -1,5 +1,9 @@
 import { access, constants } from "fs";
 import ora from "ora";
+import * as memFs from "mem-fs";
+import * as editor from "mem-fs-editor";
+import shell from "shelljs";
+
 import { normalChalk, successChalk } from "@/log";
 
 const clone = require("git-clone");
@@ -41,4 +45,30 @@ export const wrapSpin = async ({
     loadingLog.color = "green";
     loadingLog.succeed(successChalk(successText));
     loadingLog.stop();
+};
+
+export const parseTemplate = ({
+    from,
+    to,
+    setting,
+}: {
+    from: string;
+    to: string;
+    setting: Record<string, any>;
+}) => {
+    const store = memFs.create();
+    const fs = editor.create(store);
+
+    return new Promise((resolve, reject) => {
+        fs.copyTpl(from, to, setting);
+
+        fs.commit((err) => {
+            if (err) {
+                reject(err);
+            } else {
+                shell.rm("-rf", from);
+                resolve();
+            }
+        });
+    });
 };

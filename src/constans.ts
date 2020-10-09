@@ -1,10 +1,10 @@
 export enum EProjectConfig {
-    ProjectName = 'ProjectName',
+    ProjectName = "ProjectName",
     Author = "Author",
-    Description='Description',
-    Language='Language',
-    CSS='CSS',
-    Override = 'Override'
+    Description = "Description",
+    Language = "Language",
+    CSS = "CSS",
+    Override = "Override",
 }
 
 export enum ELanguage {
@@ -19,4 +19,4 @@ export enum ECss {
     Less = "Less",
 }
 
-export const GitUrl = 'https://github.com/BreathlessWay/react-app.git'
+export const GitUrl = "https://github.com/BreathlessWay/mini-temp.git";

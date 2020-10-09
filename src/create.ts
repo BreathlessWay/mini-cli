@@ -34,6 +34,7 @@ export const create = async (projectConfig: Record<EProjectConfig, string>) => {
         func: async () =>
             await downloadTemp({ url: GitUrl, path: projectPath }),
     });
+    lineSpaceLog();
 
     await generate(projectConfig, projectPath);
 };
