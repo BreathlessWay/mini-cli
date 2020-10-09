@@ -1,25 +1,20 @@
 import { resolve } from "path";
 import shell from "shelljs";
 
-import { errorLog, normalLog } from "@/log";
+import { normalLog } from "@/log";
 
 import { EProjectConfig } from "@/constans";
 
-export const generate = (
+export const generate = async (
     projectConfig: Record<EProjectConfig, string>,
     projectPath: string
 ) => {
-    try {
-        const gitFile = resolve(projectPath, ".git");
-        shell.rm("-rf", gitFile);
-        // TODO 解析替换生产 package.json 和 gulpfile
-        // TODO mem-fs mem-fs-editor 和 ejs 解析模板
-        normalLog("> 模板获取成功，开始安装依赖...");
-        shell.cd(projectPath);
-        shell.exec("npm i");
-        normalLog("> 项目创建成功");
-        process.exit();
-    } catch (e) {
-        errorLog(e);
-    }
+    const gitFile = resolve(projectPath, ".git");
+    shell.rm("-rf", gitFile);
+    // TODO 解析替换生产 package.json 和 gulpfile
+    // TODO mem-fs mem-fs-editor 和 ejs 解析模板
+    normalLog("> 模板获取成功，开始安装依赖...");
+    shell.cd(projectPath);
+    shell.exec("npm i");
+    normalLog("> 项目创建成功");
 };

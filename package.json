@@ -12,7 +12,8 @@
         "link": "npm link --force",
         "build": "npm run clean && tsc",
         "dev": "tsc --watch",
-        "clean": "rimraf dist"
+        "clean": "rimraf dist",
+        "prepublish": "npm run build"
     },
     "_moduleAliases": {
         "@": "dist"
@@ -31,18 +32,19 @@
     "license": "ISC",
     "dependencies": {
         "chalk": "^4.1.0",
+        "clui": "^0.3.6",
         "commander": "^6.1.0",
         "git-clone": "^0.1.0",
         "inquirer": "^7.3.3",
         "mem-fs": "^1.2.0",
         "mem-fs-editor": "^7.0.1",
         "module-alias": "^2.2.2",
-        "shelljs": "^0.8.4",
-        "terminal-kit": "^1.43.0"
+        "shelljs": "^0.8.4"
     },
     "devDependencies": {
         "@commitlint/cli": "^11.0.0",
         "@commitlint/config-conventional": "^11.0.0",
+        "@types/clui": "^0.3.0",
         "@types/inquirer": "^7.3.1",
         "@types/mem-fs": "^1.1.2",
         "@types/mem-fs-editor": "^7.0.0",

@@ -1,38 +1,36 @@
 import { resolve } from "path";
-import { access, constants } from "fs";
 import inquirer from "inquirer";
 import shell from "shelljs";
 
 import { generate } from "@/generate";
 
-import { errorLog, lineSpaceLog, loadingLog, normalLog } from "@/log";
+import { downloadTemp, isFileExist, spinner } from "@/utils";
+import { lineSpaceLog, normalLog } from "@/log";
 
 import { overrideQuestion } from "@/questions";
 
 import { EProjectConfig, GitUrl } from "@/constans";
 
-const clone = require("git-clone");
-
-export const create = (projectConfig: Record<EProjectConfig, string>) => {
+export const create = async (projectConfig: Record<EProjectConfig, string>) => {
     const projectPath = resolve(projectConfig[EProjectConfig.ProjectName]);
 
-    access(projectPath, constants.F_OK, async (err) => {
-        if (!err) {
-            const override = await inquirer.prompt(overrideQuestion);
-            if (override[EProjectConfig.Override]) {
-                shell.rm("-rf", projectPath);
-            } else {
-                process.exit();
-            }
-            lineSpaceLog();
+    const exist = await isFileExist(projectPath);
+    if (exist) {
+        const override = await inquirer.prompt(overrideQuestion);
+        if (override[EProjectConfig.Override]) {
+            normalLog("> 正在删除原文件");
+            shell.rm("-rf", projectPath);
+            normalLog("> 删除原文件成功");
+        } else {
+            throw "";
         }
-        loadingLog();
-        normalLog("> 开始获取项目模板");
-        clone(GitUrl, projectPath, null, (err?: Error) => {
-            if (err) {
-                errorLog(err.message);
-            }
-            generate(projectConfig, projectPath);
-        });
-    });
+        lineSpaceLog();
+    }
+
+    spinner.start();
+    spinner.message("> 开始获取项目模板");
+    await downloadTemp({ url: GitUrl, path: projectPath });
+    spinner.stop();
+
+    await generate(projectConfig, projectPath);
 };

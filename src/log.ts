@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import { terminal } from "terminal-kit";
 
 export const normalLog = (text: string) => {
     console.log(chalk.bold.blue(text));
@@ -31,9 +30,4 @@ export const errorChalk = (text: string) => chalk.bold.red(text);
 export const errorLog = (text: string) => {
     console.log(errorChalk(text));
     process.exit();
-};
-
-export const loadingLog = () => {
-    // @ts-ignore
-    terminal.spinner("dotSpinner");
 };

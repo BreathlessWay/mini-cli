@@ -24,7 +24,7 @@ export const handleOptions = async (option: InterfaceCLI) => {
             return;
         }
 
-        normalLog("> 配置项目信息：");
+        normalLog("> 配置项目：");
 
         const answers = (await inquirer.prompt(projectQuestions)) || {};
 
@@ -33,7 +33,7 @@ export const handleOptions = async (option: InterfaceCLI) => {
             ...answers,
         };
 
-        normalLog("\n> 项目配置:");
+        normalLog("\n> 项目配置信息:");
         configLog(projectConfig);
         lineSpaceLog();
 
@@ -41,7 +41,7 @@ export const handleOptions = async (option: InterfaceCLI) => {
             errorLog("创建项目需要依赖git，请先安装git");
         }
 
-        create(projectConfig);
+        await create(projectConfig);
     } catch (e) {
         errorLog(e);
     }
