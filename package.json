@@ -13,7 +13,8 @@
         "build": "npm run clean && tsc",
         "dev": "tsc --watch",
         "clean": "rimraf dist",
-        "prepublish": "npm run build"
+        "prepublish": "npm run build",
+        "deploy": "git push --follow-tags origin master && npm publish"
     },
     "_moduleAliases": {
         "@": "dist"
