@@ -3,7 +3,8 @@ import shell from "shelljs";
 
 import { create } from "@/create";
 
-import { errorLog, normalLog, configLog, lineSpaceLog } from "@/log";
+import { logErrorAndExit } from "@/utils";
+import { normalLog, configLog, lineSpaceLog } from "@/log";
 
 import { InterfaceCLI } from "@/types/cli";
 
@@ -38,11 +39,11 @@ export const handleOptions = async (option: InterfaceCLI) => {
         lineSpaceLog();
 
         if (!shell.which("git")) {
-            errorLog("创建项目需要依赖git，请先安装git");
+            logErrorAndExit("创建项目需要依赖git，请先安装git");
         }
 
         await create(projectConfig);
     } catch (e) {
-        errorLog(e);
+        logErrorAndExit(e);
     }
 };

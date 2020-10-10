@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import shell from "shelljs";
 
-import { parseTemplate } from "@/utils";
+import { deleteFile, parseAndDeleteTemp } from "@/utils";
 import { lineSpaceLog, normalLog } from "@/log";
 
 import { EProjectConfig } from "@/constans";
@@ -11,17 +11,15 @@ export const generate = async (
     projectPath: string
 ) => {
     const gitFile = resolve(projectPath, ".git");
-    shell.rm("-rf", gitFile);
-    // TODO 解析替换生成 package.json 和 gulpfile
-    // TODO mem-fs mem-fs-editor 和 ejs 解析模板
+    deleteFile(gitFile);
 
-    await parseTemplate({
+    await parseAndDeleteTemp({
         from: resolve(projectPath, "package.json.tmp"),
         to: resolve(projectPath, "package.json"),
         setting: projectConfig,
     });
 
-    await parseTemplate({
+    await parseAndDeleteTemp({
         from: resolve(projectPath, "gulpfile.js.tmp"),
         to: resolve(projectPath, "gulpfile.js"),
         setting: projectConfig,

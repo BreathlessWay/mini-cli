@@ -23,15 +23,12 @@ export const lineSpaceLog = () => {
     console.log("");
 };
 
-export const questionLog = (text: string) => {
-    return chalk.cyan(text);
-};
+export const questionChalk = (text: string) => chalk.cyan(text);
 
 export const errorChalk = (text: string) => chalk.bold.red(text);
 
 export const errorLog = (text: string) => {
     console.log(errorChalk(text));
-    process.exit();
 };
 
 export const successChalk = (text: string) => chalk.bold.green(text);
