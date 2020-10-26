@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import shell from "shelljs";
 
-import { deleteFile, parseAndDeleteTemp } from "@/utils";
+import { deleteFile, installCmd, parseAndDeleteTemp } from "@/utils";
 import { lineSpaceLog, normalLog } from "@/log";
 
 import { EProjectConfig } from "@/constans";
@@ -27,7 +27,8 @@ export const generate = async (
 
     normalLog("> 开始安装依赖...");
     shell.cd(projectPath);
-    shell.exec("npm i");
+    const cmd = installCmd();
+    cmd && shell.exec(cmd);
     lineSpaceLog();
     normalLog("> 项目创建成功");
 };

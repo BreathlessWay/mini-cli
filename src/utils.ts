@@ -96,3 +96,17 @@ export const logErrorAndExit = (text: string) => {
     errorLog(text);
     process.exit();
 };
+
+export const installCmd = () => {
+    const hasNpm = shell.which("npm");
+
+    const hasYarn = shell.which("yarn");
+
+    if (hasYarn) {
+        return "yarn --offline";
+    }
+
+    if (hasNpm) {
+        return "npm install --loglevel error --offline";
+    }
+};
