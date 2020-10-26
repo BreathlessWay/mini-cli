@@ -10,4 +10,5 @@
 
 > TODO
 
-1. 添加 mocha+chai 自动化测试
+1. 添加生成 helper 和 regeneratorRuntime 命令
+2. 添加 mocha+chai 自动化测试
