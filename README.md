@@ -2,7 +2,7 @@
 
 > 使用
 
-1. 安装 `npm i breathlessway_mini_cli -g`
+1. 安装 `npm i @breathlessway/mini-cli -g`
 2. 命令
     - `mini -h`: 帮助
     - `mini -v`: 版本
