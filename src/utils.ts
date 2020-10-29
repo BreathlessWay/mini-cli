@@ -103,10 +103,10 @@ export const installCmd = () => {
     const hasYarn = shell.which("yarn");
 
     if (hasYarn) {
-        return "yarn --offline";
+        return "yarn";
     }
 
     if (hasNpm) {
-        return "npm install --loglevel error --offline";
+        return "npm install";
     }
 };

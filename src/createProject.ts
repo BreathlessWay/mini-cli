@@ -7,7 +7,7 @@ import {
     logErrorAndExit,
     parseAndDeleteTemp,
 } from "@/utils";
-import { lineSpaceLog, normalLog } from "@/log";
+import { errorLog, lineSpaceLog, normalLog } from "@/log";
 
 import { EProjectConfig } from "@/constans";
 
@@ -33,12 +33,11 @@ export const createProject = async (
     normalLog("> 开始安装依赖...");
     shell.cd(projectPath);
     const cmd = installCmd();
-    cmd &&
-        shell.exec(cmd, (code, stdout, stderr) => {
-            code && normalLog(`${cmd} Exit code: ${code}`);
-            stdout && normalLog(`${cmd} Exit code: ${stdout}`);
-            stderr && logErrorAndExit(`${cmd} Exit code: ${stderr}`);
-        });
+    shell.exec(cmd as string, (code, stdout, stderr) => {
+        normalLog("> 项目创建成功");
+        // normalLog(`${cmd} code Exit code: ${code}`);
+        // normalLog(`${cmd} stdout Exit code: ${stdout}`);
+        // errorLog(`${cmd} stderr Exit code: ${stderr}`);
+    });
     lineSpaceLog();
-    normalLog("> 项目创建成功");
 };
