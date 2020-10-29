@@ -3,6 +3,8 @@ import path from "path";
 
 import shelljs from "shelljs";
 
+import { normalLog } from "@/log";
+
 export const generateHelpers = () => {
     const outPath = path.resolve(process.cwd(), "src");
 
@@ -86,6 +88,7 @@ import "./helpers/helpers.js";
                 if (err1) {
                     return err1;
                 }
+                normalLog("> helpers 和 regeneratorRuntime生成成功");
             }
         );
     });
