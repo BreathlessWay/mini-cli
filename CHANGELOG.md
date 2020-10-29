@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/BreathlessWay/mini-cli/compare/v0.0.13...v0.0.14) (2020-10-29)
+
+### Bug Fixes
+
+-   gengrate helper 错误 ([d0f5873](https://github.com/BreathlessWay/mini-cli/commit/d0f587328b80e6cbb01d810b2041080c784313c7))
+
 ### [0.0.13](https://github.com/BreathlessWay/mini-cli/compare/v0.0.12...v0.0.13) (2020-10-29)
 
 ### Bug Fixes
