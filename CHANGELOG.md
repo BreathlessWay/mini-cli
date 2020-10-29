@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](https://github.com/BreathlessWay/mini-cli/compare/v0.0.8...v0.0.9) (2020-10-29)
+
+### Features
+
+-   deploy ([2e43013](https://github.com/BreathlessWay/mini-cli/commit/2e430131ec491553f49df27c04f12c64c9a1a893))
+-   添加生成 babel helper 和 runtime ([099823e](https://github.com/BreathlessWay/mini-cli/commit/099823e7a2ce37aa01fbc0b6ea46a0a00772e8b4))
+
 ### [0.0.8](https://github.com/BreathlessWay/mini-cli/compare/v0.0.7...v0.0.8) (2020-10-26)
 
 ### [0.0.7](https://github.com/BreathlessWay/mini-cli/compare/v0.0.6...v0.0.7) (2020-10-10)
