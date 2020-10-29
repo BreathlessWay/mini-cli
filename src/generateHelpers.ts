@@ -45,13 +45,9 @@ export const generateHelpers = () => {
         runtimePath = `${helpRootPath}/runtime.js`;
 
     shelljs.mkdir(helpRootPath);
+    shelljs.cd(__dirname);
     shelljs.exec(
-        `npx babel-external-helpers -t global -l ${helpersWhiteList} > ${helperPath}`,
-        (code, stdout, stderr) => {
-            console.log("babel-external-helpers Exit code:", code);
-            console.log("babel-external-helpers stdout:", stdout);
-            console.log("babel-external-helpers stderr:", stderr);
-        }
+        `npx babel-external-helpers -t global -l ${helpersWhiteList} > ${helperPath}`
     );
 
     shelljs.cp(
@@ -70,18 +66,21 @@ import "./helpers/runtime.js";
 import "./helpers/helpers.js";
 `;
 
-    fs.readFile("src/app.ts", (err, data) => {
+    const appTsPath = path.resolve(outPath, "app.ts"),
+        appJsPath = path.resolve(outPath, "app.js"),
+        appPath = appTsPath || appJsPath;
+    fs.readFile(appPath, (err, data) => {
         if (err) {
             return err;
         }
 
         const text = data.toString();
-        console.log(text.trim().includes(helpImport.trim()));
+
         if (text.trim().includes(helpImport.trim())) {
             return;
         }
         fs.writeFile(
-            "src/app.ts",
+            appPath,
             warningTip + helpImport + "\n" + data.toString(),
             (err1) => {
                 if (err1) {
