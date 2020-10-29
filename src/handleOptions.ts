@@ -1,7 +1,8 @@
 import inquirer from "inquirer";
 import shell from "shelljs";
 
-import { create } from "@/create";
+import { getTemplate } from "@/getTemplate";
+import { generateHelpers } from "@/generateHelpers";
 
 import { logErrorAndExit } from "@/utils";
 import { normalLog, configLog, lineSpaceLog } from "@/log";
@@ -13,10 +14,15 @@ import { projectQuestions } from "@/questions";
 import { EProjectConfig } from "@/constans";
 
 export const handleOptions = async (option: InterfaceCLI) => {
-    const { debug, init: projectName } = option;
+    const { debug, init: projectName, gen } = option;
     try {
         if (debug) {
             configLog(option.opts());
+            return;
+        }
+
+        if (gen) {
+            generateHelpers();
             return;
         }
 
@@ -42,7 +48,7 @@ export const handleOptions = async (option: InterfaceCLI) => {
             logErrorAndExit("创建项目需要依赖git，请先安装git");
         }
 
-        await create(projectConfig);
+        await getTemplate(projectConfig);
     } catch (e) {
         logErrorAndExit(e);
     }

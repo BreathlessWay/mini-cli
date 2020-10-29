@@ -32,6 +32,7 @@
     "author": "BreathlessWay",
     "license": "ISC",
     "dependencies": {
+        "babel-cli": "^6.26.0",
         "chalk": "^4.1.0",
         "commander": "^6.1.0",
         "git-clone": "^0.1.0",
@@ -40,6 +41,7 @@
         "mem-fs-editor": "^7.0.1",
         "module-alias": "^2.2.2",
         "ora": "^5.1.0",
+        "regenerator": "^0.14.7",
         "shelljs": "^0.8.4"
     },
     "devDependencies": {

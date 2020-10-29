@@ -11,7 +11,7 @@ import { lineSpaceLog, normalLog } from "@/log";
 
 import { EProjectConfig } from "@/constans";
 
-export const generate = async (
+export const createProject = async (
     projectConfig: Record<EProjectConfig, string>,
     projectPath: string
 ) => {

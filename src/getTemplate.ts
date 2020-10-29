@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import inquirer from "inquirer";
 
-import { generate } from "@/generate";
+import { createProject } from "@/createProject";
 
 import { deleteFile, downloadTemp, isFileExist, wrapSpin } from "@/utils";
 import { lineSpaceLog, normalLog } from "@/log";
@@ -10,7 +10,9 @@ import { overrideQuestion } from "@/questions";
 
 import { EProjectConfig, GitUrl } from "@/constans";
 
-export const create = async (projectConfig: Record<EProjectConfig, string>) => {
+export const getTemplate = async (
+    projectConfig: Record<EProjectConfig, string>
+) => {
     const projectPath = resolve(projectConfig[EProjectConfig.ProjectName]);
 
     const exist = await isFileExist(projectPath);
@@ -35,5 +37,5 @@ export const create = async (projectConfig: Record<EProjectConfig, string>) => {
     });
     lineSpaceLog();
 
-    await generate(projectConfig, projectPath);
+    await createProject(projectConfig, projectPath);
 };

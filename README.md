@@ -6,9 +6,9 @@
 2. 命令
     - `mini -h`: 帮助
     - `mini -v`: 版本
+    - `mini -g`: 生成 babel helper 和 regeneratorRuntime
     - `mini -i <name>`: 创建项目
 
 > TODO
 
-1. 添加生成 helper 和 regeneratorRuntime 命令
-2. 添加 mocha+chai 自动化测试
+~~1. 添加生成 helper 和 regeneratorRuntime 命令~~ 2. 添加 mocha+chai 自动化测试
