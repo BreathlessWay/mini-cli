@@ -6,7 +6,7 @@
 2. 命令
     - `mini -h`: 帮助
     - `mini -v`: 版本
-    - `mini -g`: 生成 babel helper 和 regeneratorRuntime
+    - `mini -g <path>`: 生成 babel helper 和 regeneratorRuntime 到指定目录
     - `mini -i <name>`: 创建项目
 
 > TODO
