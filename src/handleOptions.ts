@@ -10,35 +10,32 @@ import { normalLog, configLog, lineSpaceLog } from "@/log";
 import { InterfaceCLI } from "@/types/cli";
 
 import { projectQuestions } from "@/questions";
-
 import { EProjectConfig } from "@/constans";
 
 export const handleOptions = async (option: InterfaceCLI) => {
-    const { debug, init: projectName, gen } = option;
+    const { debug, init, gen: genPath } = option;
     try {
         if (debug) {
             configLog(option.opts());
             return;
         }
 
-        if (gen) {
-            generateHelpers();
+        if (genPath) {
+            await generateHelpers({ genPath });
             return;
         }
 
-        if (!projectName) {
+        if (!init) {
             option.help();
             return;
         }
 
         normalLog("> 配置项目：");
 
-        const answers = (await inquirer.prompt(projectQuestions)) || {};
-
-        const projectConfig = {
-            [EProjectConfig.ProjectName]: projectName,
-            ...answers,
-        };
+        const projectConfig =
+            (await inquirer.prompt<Record<EProjectConfig, string>>(
+                projectQuestions
+            )) || {};
 
         normalLog("\n> 项目配置信息:");
         configLog(projectConfig);

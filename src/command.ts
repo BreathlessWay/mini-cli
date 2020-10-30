@@ -13,8 +13,11 @@ const cli: InterfaceCLI = new Command();
 cli.description("Generate Mini Program Template")
     .version(packageJson.version, "-v, --version")
     .option("-d, --debug", "show debug info")
-    .option("-g, --gen", "generate babel helpers and regeneratorRuntime")
-    .option("-i, --init <name>", "init project name")
+    .option("-i, --init", "init project")
+    .option(
+        "-g, --gen <path>",
+        "generate babel helper and runtime to your path"
+    )
     .action((option: InterfaceCLI) => {
         handleOptions(option);
     })

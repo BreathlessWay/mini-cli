@@ -2,20 +2,44 @@ import { userInfo } from "os";
 
 import { errorChalk, questionChalk } from "@/log";
 
+import inquirer from "inquirer";
 import { ECss, ELanguage, EProjectConfig } from "@/constans";
 
-export const projectQuestions = [
+export const projectQuestions: Array<inquirer.QuestionCollection> = [
+    {
+        type: "input",
+        name: EProjectConfig.ProjectName,
+        message: questionChalk("The name of this mini program"),
+        validate: (input: string) => {
+            if (input && input.trim()) {
+                return true;
+            }
+            return "project name is required";
+        },
+    },
     {
         type: "input",
         name: EProjectConfig.Author,
         message: questionChalk("The author of this mini program"),
         default: userInfo().username,
+        validate: (input: string) => {
+            if (input && input.trim()) {
+                return true;
+            }
+            return "author is required";
+        },
     },
     {
         type: "input",
         name: EProjectConfig.Description,
         message: questionChalk("The description of this mini program"),
         default: "mini program",
+        validate: (input: string) => {
+            if (input && input.trim()) {
+                return true;
+            }
+            return "description is required";
+        },
     },
     {
         type: "list",

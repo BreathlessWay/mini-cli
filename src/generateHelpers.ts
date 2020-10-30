@@ -4,9 +4,20 @@ import path from "path";
 import shelljs from "shelljs";
 
 import { normalLog } from "@/log";
+import { isFileExist, logErrorAndExit } from "@/utils";
 
-export const generateHelpers = () => {
-    const outPath = path.resolve(process.cwd(), "src");
+export const generateHelpers = async ({ genPath }: { genPath?: string }) => {
+    let outPath;
+    if (genPath) {
+        if (path.isAbsolute(genPath)) {
+            outPath = genPath;
+        } else {
+            outPath = path.resolve(process.cwd(), genPath);
+        }
+    }
+    if (!outPath || !(await isFileExist(outPath))) {
+        throw Error(`> 文件目录${outPath}不存在`);
+    }
 
     const helpersWhiteList = [
         "typeof",
@@ -43,8 +54,7 @@ export const generateHelpers = () => {
 
     const helpRootPath = path.resolve(outPath, "helpers");
 
-    const helperPath = `${helpRootPath}/helpers.js`,
-        runtimePath = `${helpRootPath}/runtime.js`;
+    const helperPath = `${helpRootPath}/helpers.js`;
 
     shelljs.mkdir(helpRootPath);
     shelljs.cd(__dirname);
@@ -58,38 +68,10 @@ export const generateHelpers = () => {
             __dirname,
             "../node_modules/regenerator-runtime/runtime.js"
         ),
-        `${runtimePath}`
+        `${helpRootPath}`
     );
 
-    const warningTip = "// 在最顶层引入 不可删除";
+    shelljs.cp("-Rf", path.resolve(__dirname, "../help.md"), `${helpRootPath}`);
 
-    const helpImport = `
-import "./helpers/runtime.js";
-import "./helpers/helpers.js";
-`;
-
-    const appTsPath = path.resolve(outPath, "app.ts"),
-        appJsPath = path.resolve(outPath, "app.js"),
-        appPath = appTsPath || appJsPath;
-    fs.readFile(appPath, (err, data) => {
-        if (err) {
-            return err;
-        }
-
-        const text = data.toString();
-
-        if (text.trim().includes(helpImport.trim())) {
-            return;
-        }
-        fs.writeFile(
-            appPath,
-            warningTip + helpImport + "\n" + data.toString(),
-            (err1) => {
-                if (err1) {
-                    return err1;
-                }
-                normalLog("> helpers 和 regeneratorRuntime生成成功");
-            }
-        );
-    });
+    normalLog("> helpers 和 regeneratorRuntime生成成功，请在入口文件引入");
 };
