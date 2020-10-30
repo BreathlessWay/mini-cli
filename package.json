@@ -41,7 +41,7 @@
         "mem-fs-editor": "^7.0.1",
         "module-alias": "^2.2.2",
         "ora": "^5.1.0",
-        "regenerator": "^0.14.7",
+        "regenerator": "0.14.7",
         "shelljs": "^0.8.4"
     },
     "devDependencies": {
