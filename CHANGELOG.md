@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.15](https://github.com/BreathlessWay/mini-cli/compare/v0.0.14...v0.0.15) (2020-10-30)
+
+### Features
+
+-   生成 helper 改为由用户指定目录 ([88b8594](https://github.com/BreathlessWay/mini-cli/commit/88b859497fc733320db97e62ec32d8bb0565dcaf))
+
 ### [0.0.14](https://github.com/BreathlessWay/mini-cli/compare/v0.0.13...v0.0.14) (2020-10-29)
 
 ### Bug Fixes
