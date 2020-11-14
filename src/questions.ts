@@ -1,8 +1,8 @@
 import { userInfo } from "os";
+import inquirer from "inquirer";
 
 import { errorChalk, questionChalk } from "@/log";
 
-import inquirer from "inquirer";
 import { ECss, ELanguage, EProjectConfig } from "@/constans";
 
 export const projectQuestions: Array<inquirer.QuestionCollection> = [

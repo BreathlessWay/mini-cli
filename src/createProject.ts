@@ -4,10 +4,9 @@ import shell from "shelljs";
 import {
     deleteFile,
     installCmd,
-    logErrorAndExit,
     parseAndDeleteTemp,
 } from "@/utils";
-import { errorLog, lineSpaceLog, normalLog } from "@/log";
+import {  lineSpaceLog, normalLog } from "@/log";
 
 import { EProjectConfig } from "@/constans";
 
@@ -33,11 +32,8 @@ export const createProject = async (
     normalLog("> 开始安装依赖...");
     shell.cd(projectPath);
     const cmd = installCmd();
-    shell.exec(cmd as string, (code, stdout, stderr) => {
+    shell.exec(cmd as string, () => {
         normalLog("> 项目创建成功");
-        // normalLog(`${cmd} code Exit code: ${code}`);
-        // normalLog(`${cmd} stdout Exit code: ${stdout}`);
-        // errorLog(`${cmd} stderr Exit code: ${stderr}`);
     });
     lineSpaceLog();
 };
