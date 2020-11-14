@@ -4,7 +4,7 @@ import path from "path";
 import shelljs from "shelljs";
 
 import { normalLog } from "@/log";
-import { isFileExist, logErrorAndExit } from "@/utils";
+import { isFileExist } from "@/utils";
 
 export const generateHelpers = async ({ genPath }: { genPath?: string }) => {
     let outPath;
