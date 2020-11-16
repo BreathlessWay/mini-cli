@@ -13,3 +13,4 @@
 
 1. ~~添加生成 helper 和 regeneratorRuntime 命令~~
 2. 添加 mocha+chai 自动化测试
+3. 使用[monorepos](https://github.com/lerna/lerna)
