@@ -19,4 +19,9 @@ export enum ECss {
     Less = "Less",
 }
 
+export enum ETempPath {
+    Javascript = "jsTemp",
+    Typescript = "tsTemp",
+}
+
 export const GitUrl = "https://github.com/BreathlessWay/mini-temp.git";

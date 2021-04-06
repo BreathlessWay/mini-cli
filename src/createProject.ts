@@ -1,14 +1,10 @@
 import { resolve } from "path";
 import shell from "shelljs";
 
-import {
-    deleteFile,
-    installCmd,
-    parseAndDeleteTemp,
-} from "@/utils";
-import {  lineSpaceLog, normalLog } from "@/log";
+import { deleteFile, installCmd, parseAndDeleteTemp } from "@/utils";
+import { lineSpaceLog, normalLog } from "@/log";
 
-import { EProjectConfig } from "@/constans";
+import { ELanguage, EProjectConfig, ETempPath } from "@/constans";
 
 export const createProject = async (
     projectConfig: Record<EProjectConfig, string>,
@@ -32,8 +28,23 @@ export const createProject = async (
     normalLog("> 开始安装依赖...");
     shell.cd(projectPath);
     const cmd = installCmd();
-    shell.exec(cmd as string, () => {
-        normalLog("> 项目创建成功");
-    });
+    shell.exec(cmd as string);
+    normalLog("> 依赖安装完成，开始创建模版...");
+
+    if (projectConfig.Language === ELanguage.Javascript) {
+        shell.cp("-Rf", ETempPath.Javascript + "/*", projectPath);
+    }
+
+    if (projectConfig.Language === ELanguage.Typescript) {
+        shell.cp("-Rf", ETempPath.Typescript + "/*", projectPath);
+    }
+
+    shell.rm(
+        "-rf",
+        resolve(projectPath, ETempPath.Javascript),
+        resolve(projectPath, ETempPath.Typescript)
+    );
+
+    normalLog("> 项目创建成功");
     lineSpaceLog();
 };
