@@ -25,12 +25,8 @@ export const createProject = async (
         setting: projectConfig,
     });
 
-    normalLog("> 开始安装依赖...");
+    normalLog("> 开始创建模版...");
     shell.cd(projectPath);
-    const cmd = installCmd();
-    shell.exec(cmd as string);
-    normalLog("> 依赖安装完成，开始创建模版...");
-
     if (projectConfig.Language === ELanguage.Javascript) {
         shell.cp("-Rf", ETempPath.Javascript + "/*", projectPath);
     }
@@ -44,6 +40,10 @@ export const createProject = async (
         resolve(projectPath, ETempPath.Javascript),
         resolve(projectPath, ETempPath.Typescript)
     );
+
+    normalLog("> 模版创建成功，开始安装依赖...");
+    const cmd = installCmd();
+    shell.exec(cmd as string);
 
     normalLog("> 项目创建成功");
     lineSpaceLog();
