@@ -1,6 +1,6 @@
 {
     "name": "@breathlessway/mini-cli",
-    "version": "0.0.17",
+    "version": "0.0.18",
     "description": "mini program cli",
     "main": "bin/mini",
     "bin": {
