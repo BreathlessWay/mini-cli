@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.19](https://github.com/BreathlessWay/mini-cli/compare/v0.0.18...v0.0.19) (2021-04-08)
+
+### Features
+
+-   修改模板生成方式 ([6dcf17f](https://github.com/BreathlessWay/mini-cli/commit/6dcf17f0e64783adcb50a183ffa6a675be82dd1f))
+
 ### [0.0.18](https://github.com/BreathlessWay/mini-cli/compare/v0.0.17...v0.0.18) (2021-04-07)
 
 ### [0.0.17](https://github.com/BreathlessWay/mini-cli/compare/v0.0.16...v0.0.17) (2020-11-14)
