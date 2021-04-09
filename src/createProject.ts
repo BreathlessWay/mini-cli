@@ -22,6 +22,12 @@ export const createProject = async (
     });
 
     await parseAndDeleteTemp({
+        from: resolve(projectPath, ".babelrc.tmp"),
+        to: resolve(projectPath, ".babelrc"),
+        setting: projectConfig,
+    });
+
+    await parseAndDeleteTemp({
         from: resolve(projectPath, "gulpfile.js.tmp"),
         to: resolve(projectPath, "gulpfile.js"),
         setting: projectConfig,
