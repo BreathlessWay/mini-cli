@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.20](https://github.com/BreathlessWay/mini-cli/compare/v0.0.19...v0.0.20) (2021-04-09)
+
+### Features
+
+-   解析 babel temp ([40cf01e](https://github.com/BreathlessWay/mini-cli/commit/40cf01e4f14000749ecac3132594880d278b2463))
+
 ### [0.0.19](https://github.com/BreathlessWay/mini-cli/compare/v0.0.18...v0.0.19) (2021-04-08)
 
 ### Features
