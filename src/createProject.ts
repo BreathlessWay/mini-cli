@@ -1,11 +1,11 @@
 import { resolve } from "path";
-import { readFileSync } from "fs";
 import shell from "shelljs";
 
 import { deleteFile, installCmd, parseAndDeleteTemp } from "@/utils";
 import { lineSpaceLog, normalLog } from "@/log";
 
-import { ECss, ELanguage, EProjectConfig, TemplateFile } from "@/constans";
+import { BaseDir, ECss, ELanguage, EProjectConfig } from "@/constans";
+import { generateTemplate } from "@/scanSrc";
 import { TemplateInfo } from "@/types/cli";
 
 export const createProject = async (
@@ -36,8 +36,7 @@ export const createProject = async (
     normalLog("> 开始创建模版...");
     shell.cd(projectPath);
 
-    const templateRes = readFileSync(resolve(TemplateFile)),
-        templateInfo: TemplateInfo = JSON.parse(templateRes.toString());
+    const templateInfo = generateTemplate(BaseDir) as TemplateInfo;
 
     if (projectConfig.Language === ELanguage.Javascript) {
         shell.rm("-rf", templateInfo.Typescript);
@@ -70,8 +69,6 @@ export const createProject = async (
         shell.rm("-rf", templateInfo.Less);
         shell.rm("-rf", templateInfo.Wxss);
     }
-
-    shell.rm("-rf", resolve(projectPath, TemplateFile));
 
     normalLog("> 模版创建成功，开始安装依赖...");
     const cmd = installCmd();
