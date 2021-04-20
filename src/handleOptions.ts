@@ -17,7 +17,6 @@ export const handleOptions = async (option: InterfaceCLI) => {
     try {
         if (debug) {
             configLog(option.opts());
-            return;
         }
 
         if (genPath) {
@@ -28,6 +27,10 @@ export const handleOptions = async (option: InterfaceCLI) => {
         if (!init) {
             option.help();
             return;
+        }
+
+        if (!shell.which("git")) {
+            logErrorAndExit("创建项目需要依赖git，请先安装git");
         }
 
         normalLog("> 配置项目：");
@@ -41,11 +44,7 @@ export const handleOptions = async (option: InterfaceCLI) => {
         configLog(projectConfig);
         lineSpaceLog();
 
-        if (!shell.which("git")) {
-            logErrorAndExit("创建项目需要依赖git，请先安装git");
-        }
-
-        await getTemplate(projectConfig);
+        // await getTemplate(projectConfig);
     } catch (e) {
         logErrorAndExit(e);
     }
