@@ -44,7 +44,7 @@ export const handleOptions = async (option: InterfaceCLI) => {
         configLog(projectConfig);
         lineSpaceLog();
 
-        // await getTemplate(projectConfig);
+        await getTemplate(projectConfig);
     } catch (e) {
         logErrorAndExit(e);
     }
