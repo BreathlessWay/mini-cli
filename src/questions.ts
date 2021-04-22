@@ -3,7 +3,7 @@ import inquirer from "inquirer";
 
 import { errorChalk, questionChalk } from "@/log";
 
-import { ECss, ELanguage, EProjectConfig } from "@/constans";
+import { ECss, EGithubSource, ELanguage, EProjectConfig } from "@/constans";
 
 export const projectQuestions: Array<inquirer.QuestionCollection> = [
     {
@@ -61,5 +61,16 @@ export const overrideQuestion = [
         name: EProjectConfig.Override,
         message: errorChalk("当前目录已存在同名文件，是否删除原文件?"),
         default: false,
+    },
+];
+
+export const useGitSource = [
+    {
+        type: "list",
+        name: EProjectConfig.UseGithubSource,
+        message: questionChalk(
+            "使用https还是ssh拉取拉取模板？当前https不稳定推荐使用ssh！"
+        ),
+        choices: [EGithubSource.SSH, EGithubSource.HTTPS],
     },
 ];

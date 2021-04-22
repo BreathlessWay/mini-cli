@@ -5,6 +5,7 @@ export enum EProjectConfig {
     Language = "Language",
     CSS = "CSS",
     Override = "Override",
+    UseGithubSource = "UseGithubSource",
 }
 
 export enum ELanguage {
@@ -19,6 +20,14 @@ export enum ECss {
     Less = "Less",
 }
 
-export const GitUrl = "https://github.com/BreathlessWay/mini-temp.git";
+export enum EGithubSource {
+    SSH = "SSH",
+    HTTPS = "HTTPS",
+}
+
+export const GithubSource = {
+    [EGithubSource.SSH]: "git@github.com:BreathlessWay/mini-temp.git",
+    [EGithubSource.HTTPS]: "https://github.com/BreathlessWay/mini-temp.git",
+};
 
 export const BaseDir = "src";

@@ -6,9 +6,9 @@ import { createProject } from "@/createProject";
 import { deleteFile, downloadTemp, isFileExist, wrapSpin } from "@/utils";
 import { lineSpaceLog, normalLog } from "@/log";
 
-import { overrideQuestion } from "@/questions";
+import { overrideQuestion, useGitSource } from "@/questions";
 
-import { EProjectConfig, GitUrl } from "@/constans";
+import { EGithubSource, EProjectConfig, GithubSource } from "@/constans";
 
 export const getTemplate = async (
     projectConfig: Record<EProjectConfig, string>
@@ -24,16 +24,23 @@ export const getTemplate = async (
             deleteFile(projectPath);
             normalLog("> 删除原文件成功");
         } else {
-            throw "";
+            throw new Error("请更换项目名称，或删除已存在的文件后重试");
         }
         lineSpaceLog();
     }
+
+    let githubSource = await inquirer.prompt(useGitSource);
+    githubSource = githubSource[EProjectConfig.UseGithubSource];
+    githubSource = GithubSource[githubSource as EGithubSource];
 
     await wrapSpin({
         text: "> 开始获取项目模板",
         successText: "> 获取项目模板成功",
         func: async () =>
-            await downloadTemp({ url: GitUrl, path: projectPath }),
+            await downloadTemp({
+                url: githubSource,
+                path: projectPath,
+            }),
     });
     lineSpaceLog();
 
