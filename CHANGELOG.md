@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/BreathlessWay/mini-cli/compare/v0.0.23...v0.0.24) (2021-04-22)
+
+### Features
+
+-   添加 github 拉取使用 ssh 或 https 选择 ([ed1dc12](https://github.com/BreathlessWay/mini-cli/commit/ed1dc1209ef95555f9373925b9cea4e66ea24309))
+
+### Bug Fixes
+
+-   sth ([f39266d](https://github.com/BreathlessWay/mini-cli/commit/f39266de942359c8b8a26cb1c25fa670b7b8d073))
+
 ### [0.0.23](https://github.com/BreathlessWay/mini-cli/compare/v0.0.22...v0.0.23) (2021-04-21)
 
 ### [0.0.22](https://github.com/BreathlessWay/mini-cli/compare/v0.0.21...v0.0.22) (2021-04-20)
