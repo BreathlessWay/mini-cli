@@ -12,14 +12,10 @@ const templateJson = {
     Wxss: [],
 };
 
-const ignoreFile = [
-    join("src", "helpers", "helpers.js"),
-    join("src", "helpers", "runtime.js"),
-];
-
 export const generateTemplate = (
     file: string,
-    template: TemplateInfo = templateJson
+    template: TemplateInfo = templateJson,
+    ignoreFile: Array<string>
 ) => {
     if (~ignoreFile.indexOf(file)) {
         return;
@@ -60,7 +56,7 @@ export const generateTemplate = (
             const res = readdirSync(file);
             res.forEach((item: string) => {
                 const _path = join(file, item);
-                generateTemplate(_path, template);
+                generateTemplate(_path, template, ignoreFile);
             });
         }
         return template;

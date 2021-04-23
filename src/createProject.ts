@@ -1,5 +1,6 @@
-import { resolve } from "path";
+import { resolve, join } from "path";
 import shell from "shelljs";
+import glob from "glob";
 
 import { deleteFile, installCmd, parseAndDeleteTemp } from "@/utils";
 import { lineSpaceLog, normalLog } from "@/log";
@@ -36,7 +37,13 @@ export const createProject = async (
     normalLog("> 开始创建模版...");
     shell.cd(projectPath);
 
-    const templateInfo = generateTemplate(BaseDir) as TemplateInfo;
+    let ignoreFile = glob.sync("src/helpers/*");
+    ignoreFile = ignoreFile?.map((file) => join(file)) || [];
+    const templateInfo = generateTemplate(
+        BaseDir,
+        void 0,
+        ignoreFile
+    ) as TemplateInfo;
 
     if (projectConfig.Language === ELanguage.Javascript) {
         shell.rm("-rf", templateInfo.Typescript);
